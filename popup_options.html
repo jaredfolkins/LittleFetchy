@@ -1,0 +1,48 @@
+<html>
+  <head><title>WatchDog Options</title></head>
+  <script type="text/javascript">
+
+  // Saves options to localStorage.
+  function save_options() {
+
+    var email_field = document.getElementById("email");
+    localStorage["email"] = email_field.value;
+
+    var password_field = document.getElementById("password");
+    localStorage["password"] = password_field.value;
+
+    // Update status to let user know options were saved.
+    var status = document.getElementById("status");
+    status.innerHTML = "Options Saved";
+    setTimeout(function() {
+      status.innerHTML = "";
+    }, 1000);
+  }
+
+  // Restores select box state to saved value from localStorage.
+  function restore_options() {
+    var email_field = document.getElementById("email");
+    email_field.value = localStorage["email"];
+
+    var password_field = document.getElementById("password");
+    password_field.value = localStorage["password"];
+  }
+
+  </script>
+
+  <body onload="restore_options()">
+
+    <div id="status"></div>
+    <br />
+
+    Email:
+    <input id="email" type="text" name="email" size="25">
+    <br />
+
+    Password:
+    <input id="password" type="password" name="password" size="25">
+    <br />
+
+    <button onclick="save_options()">Save</button>
+  </body>
+</html>

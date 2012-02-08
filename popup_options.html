@@ -15,13 +15,14 @@
     // Update status to let user know options were saved.
     var status = document.getElementById("status");
 
-    status.innerHTML = '<div style="color:#0BD600">Options Saved</div>';
+    status.innerHTML = '<div style="color:#FF8700">Options Saved</div>';
     setTimeout(function() {
       status.innerHTML = "";
     }, 2000);
 
-    var dog = new Dog();
-    dog.run();
+    //get background.html and make the dog object run
+    var background = chrome.extension.getBackgroundPage();
+    background.dog.run();
   }
 
   // Restores select box state to saved value from localStorage.

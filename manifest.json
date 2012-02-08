@@ -1,7 +1,7 @@
 {
   "name" : "LittleFetchy (Beta)",
   "version" : "0.1",
-  "description" : "Allows BendBroadBand.com subscribers to monitor data usage with a plugin",
+  "description" : "Written by Jared Folkins, this tool allows BendBroadBand subscribers to monitor data usage.",
   "options_page" : "popup_options.html",
   "background_page" : "background.html",
   "icons" : {

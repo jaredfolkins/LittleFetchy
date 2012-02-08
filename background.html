@@ -1,64 +1,9 @@
 <html>
   <head>
+    <script src="dog.js"></script>
     <script>
-
-      var _DEBUG = 1;
-      var _currentUsage = '0';
-      var _monthlyCap = '0';
-
-      function _getMacAddresses() {}
-
-      function _log(text) {
-        if(_DEBUG == 1) {
-            console.log(text);
-        }
-      }
-
-      function _setBadge() {
-        chrome.browserAction.setBadgeText({
-          text: String( _currentUsage + 'g' )
-        });
-        chrome.browserAction.setBadgeBackgroundColor({
-          color: [0, 0, 0, 255]
-        });
-      };
-
-
-      function _setUsage(text) {
-        var pattern = /Current\sUsage:\s\<\/strong\>(\d*)\.\d\sGB\/(\d*)\sGB\<\/td\>/g;
-        var results = pattern.exec(text);
-        if(results) {
-          _currentUsage = results[1];
-          _monthlyCap = results[2];
-        }
-      }
-
-      function _run() {
-        var email = encodeURIComponent(localStorage['email']);
-        var password = encodeURIComponent(localStorage['password']);
-        _log(email);
-        _log(password);
-        var url = "https://secure.bendbroadband.com/usage/usage.asp?action=submit&pageID=mbb&subID=hsiu&adct=3";
-        var params = 'Submit1=View+Usage&email=' + email + '&password=' + password;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(params);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4) {
-            _log(xhr.responseText);
-            _setUsage(xhr.responseText);
-            _setBadge();
-          }
-        }
-      }
-
-      function _init() {
-        _run();
-        setInterval("_run()", 1000*60*60*8);
-      }
-
-      _init();
+     var dog = new Dog();
+     dog.init();
     </script>
   </head>
   <body>

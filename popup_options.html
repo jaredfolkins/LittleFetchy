@@ -1,5 +1,6 @@
 <html>
   <head><title>WatchDog Options</title></head>
+  <script src="dog.js"></script>
   <script type="text/javascript">
 
   // Saves options to localStorage.
@@ -13,10 +14,12 @@
 
     // Update status to let user know options were saved.
     var status = document.getElementById("status");
-    status.innerHTML = "Options Saved";
+    status.innerHTML = '<div style="color:#0BD600">Options Saved</div>';
     setTimeout(function() {
       status.innerHTML = "";
-    }, 1000);
+    }, 2000);
+    var dog = new Dog();
+    dog.init();
   }
 
   // Restores select box state to saved value from localStorage.

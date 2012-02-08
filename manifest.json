@@ -1,5 +1,5 @@
 {
-  "name" : "WatchDog",
+  "name" : "LittleFetchy (Beta)",
   "version" : "0.1",
   "description" : "Allows BendBroadBand.com subscribers to monitor data usage with a plugin",
   "options_page" : "popup_options.html",

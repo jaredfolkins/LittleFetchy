@@ -14,21 +14,30 @@
 
     // Update status to let user know options were saved.
     var status = document.getElementById("status");
+
     status.innerHTML = '<div style="color:#0BD600">Options Saved</div>';
     setTimeout(function() {
       status.innerHTML = "";
     }, 2000);
+
     var dog = new Dog();
-    dog.init();
+    dog.run();
   }
 
   // Restores select box state to saved value from localStorage.
   function restore_options() {
-    var email_field = document.getElementById("email");
-    email_field.value = localStorage["email"];
+    var email = localStorage["email"];
+    var password = localStorage["password"];
 
-    var password_field = document.getElementById("password");
-    password_field.value = localStorage["password"];
+    if (email) {
+      var email_field = document.getElementById("email");
+      email_field.value = email;
+    }
+
+    if (password) {
+      var password_field = document.getElementById("password");
+      password_field.value = password;
+    }
   }
 
   </script>

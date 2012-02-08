@@ -9,7 +9,7 @@ function Dog() {
     }
   }
 
-  this.setBadge = function() {
+  this.setUsageBadge = function() {
     chrome.browserAction.setBadgeText({
       text: String( this._currentUsage + 'g' )
     });
@@ -18,16 +18,32 @@ function Dog() {
     });
   };
 
+  this.setUsageBadgeError = function() {
+    chrome.browserAction.setBadgeText({
+      text: String('error')
+    });
+    chrome.browserAction.setBadgeBackgroundColor({
+      color: [255, 0, 0, 255]
+    });
+  };
 
-  this.setUsage = function(text) {
+
+  this.setBadge = function(text) {
     var pattern = /Current\sUsage:\s\<\/strong\>(\d*)\.\d\sGB\/(\d*)\sGB\<\/td\>/g;
     var results = pattern.exec(text);
     if(results) {
       this._currentUsage = results[1];
       this._monthlyCap = results[2];
+      this.setUsageBadge();
+    } else {
+      this.setUsageBadgeError();
+      this.unsetLocalStoragePassword();
     }
   }
 
+  this.unsetLocalStoragePassword = function() {
+    localStorage['password'] = '';
+  }
   this.run = function() {
     var email = encodeURIComponent(localStorage['email']);
     var password = encodeURIComponent(localStorage['password']);
@@ -44,8 +60,7 @@ function Dog() {
         if (xhr.readyState == 4) {
           var dog = new Dog();
           dog.log(xhr.responseText);
-          dog.setUsage(xhr.responseText);
-          dog.setBadge();
+          dog.setBadge(xhr.responseText);
         }
       }
     }

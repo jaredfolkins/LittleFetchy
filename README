@@ -1,0 +1,24 @@
+LittleFetchy
+Copyright Jared Folkins 2012
+
+Description:
+
+LittleFetchy is a Chrome Extension that logs a BendBroadBand
+customer into their account and notifies them of their monthly
+bandwith usage.
+
+Releases:
+
+0.3
+
+enhc: Displays popup when user approaches usage threshold
+enhc: User can save threshold and time values
+enhc: README
+
+0.2
+
+enhc: Displays error badge when unable to authenticate
+
+0.1
+
+enhc: Inital Release

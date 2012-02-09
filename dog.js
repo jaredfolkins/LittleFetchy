@@ -2,6 +2,17 @@ function Dog() {
   this._DEBUG = 1;
   this._currentUsage = localStorage['usage'] || 0;
   this._monthlyCap = localStorage['cap'] || 0;
+  this._percent = localStorage['percent'];
+  this._minute = localStorage['minute'];
+  this._supportTelephone = '541-555-1212';
+
+  if(!this._percent) {
+    localStorage['percent'] = 99;
+  }
+
+  if(!this._minute) {
+    localStorage['minute'] = 1440;
+  }
 
   this.log = function(text) {
     if(dog._DEBUG == 1) {
@@ -9,10 +20,10 @@ function Dog() {
     }
   };
 
-  this.setUsageBadge = function() {
+  this.setUsageBadge = function(usage) {
     dog.log('setUsageBadge() Current Usage = ' + dog._currentUsage);
     chrome.browserAction.setBadgeText({
-      text: String( dog._currentUsage + 'g' )
+      text: String( usage + 'g' )
     });
     chrome.browserAction.setBadgeBackgroundColor({
       color: [0, 0, 0, 255]
@@ -30,13 +41,25 @@ function Dog() {
   };
 
   this.notify = function() {
+
     // Create a simple text notification:
+    var usage = localStorage['usage'];
+    var cap = localStorage['cap'];
+    var percent = localStorage['percent'];
+    var target = cap / usage * 10;
     var pattern = /(\d{2})/g
-    var target = dog._monthlyCap / dog._currentUsage * 10;
     var results = pattern.exec(target);
     var percentage = results[1] || 0;
-    if(percentage >= 70) {
-      var message = 'You have used ' + percentage + '% of your monthly alloment.';
+
+    dog.log("dog.notify(): " + usage);
+    dog.log("dog.notify(): " + cap);
+    dog.log("dog.notify(): " + percent );
+    dog.log("dog.notify(): " + results);
+    dog.log("dog.notify(): " + percentage);
+
+    if(percentage >= percent) {
+      var message = 'You have used ' + percentage + '% of your monthly alloment. Feel free to call ' + dog._supportTelephone + ' and increase your usage by upgrading your account.';
+      dog.log("this.notify(): " + message);
       var notification = webkitNotifications.createNotification(
         '48x48.png',  // icon url - can be relative
         'Usage Alert!',  // notification title
@@ -50,9 +73,11 @@ function Dog() {
     var pattern = /Current\sUsage:\s\<\/strong\>(\d*)\.\d\sGB\/(\d*)\sGB\<\/td\>/g;
     var results = pattern.exec(text);
     if(results) {
+      localStorage['usage'] = results[1];
+      localStorage['cap'] = results[2];
       dog._currentUsage = results[1];
       dog._monthlyCap = results[2];
-      dog.setUsageBadge();
+      dog.setUsageBadge(dog._currentUsage);
     } else {
       dog.setUsageBadgeError();
       dog.unsetLocalStoragePassword();
@@ -66,6 +91,8 @@ function Dog() {
   this.run = function() {
     var email = encodeURIComponent(localStorage['email']);
     var password = encodeURIComponent(localStorage['password']);
+    var usage = localStorage['usage'];
+    (usage) ? dog.setUsageBadge(usage) : dog.setUsageBadge('-');
     if(email != 'undefined' && password != 'undefined') {
       dog.log(email);
       dog.log(password);
@@ -77,7 +104,6 @@ function Dog() {
       xhr.send(params);
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
-          //dog.log(xhr.responseText);
           dog.setBadge(xhr.responseText);
         }
       }
@@ -86,9 +112,10 @@ function Dog() {
 
   this.init = function() {
     dog.run();
+    var minute = localStorage['minute'];
+    dog.log("dog.init(): " + minute)
     //if(localStorage['fetchInterval']) ?  = local
     setInterval("dog.run()", 1000*60*60*8);
-    setInterval("dog.notify()", 1000*60*60*24);
+    setInterval("dog.notify()", 1000*60*minute);
   };
-
 };

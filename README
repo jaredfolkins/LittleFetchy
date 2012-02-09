@@ -9,6 +9,10 @@ bandwith usage.
 
 Releases:
 
+0.4
+
+fix: bug that would prevent tool from trying to update after saving options.
+
 0.3
 
 enhc: Displays popup when user approaches usage threshold

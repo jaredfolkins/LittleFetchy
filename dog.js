@@ -1,7 +1,7 @@
 function Dog() {
-  this._DEBUG = 1;
-  this._currentUsage = localStorage['usage'] || 0;
-  this._monthlyCap = localStorage['cap'] || 0;
+  this._DEBUG = 0;
+  this._currentUsage = localStorage['usage'];
+  this._monthlyCap = localStorage['cap'];
   this._percent = localStorage['percent'];
   this._minute = localStorage['minute'];
   this._supportTelephone = '541-555-1212';
@@ -44,17 +44,20 @@ function Dog() {
 
     // Create a simple text notification:
     var usage = localStorage['usage'];
-    var cap = localStorage['cap'];
-    var percent = localStorage['percent'];
-    var target = cap / usage * 10;
-    var pattern = /(\d{2})/g
-    var results = pattern.exec(target);
-    var percentage = results[1] || 0;
-
     dog.log("dog.notify(): " + usage);
+
+    var cap = localStorage['cap'];
     dog.log("dog.notify(): " + cap);
+
+    var percent = localStorage['percent'];
     dog.log("dog.notify(): " + percent );
+
+    var target = cap / usage * 10;
+    var pattern = /(\d{1,2})/g
+    var results = pattern.exec(target);
     dog.log("dog.notify(): " + results);
+
+    var percentage = results ? results[1] : 0;
     dog.log("dog.notify(): " + percentage);
 
     if(percentage >= percent) {
@@ -92,7 +95,7 @@ function Dog() {
     var email = encodeURIComponent(localStorage['email']);
     var password = encodeURIComponent(localStorage['password']);
     var usage = localStorage['usage'];
-    (usage) ? dog.setUsageBadge(usage) : dog.setUsageBadge('-');
+    dog.log("dog.run(): " + email + "," + password + "," + usage);
     if(email != 'undefined' && password != 'undefined') {
       dog.log(email);
       dog.log(password);
@@ -104,6 +107,7 @@ function Dog() {
       xhr.send(params);
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
+          dog.log(xhr.responseText);
           dog.setBadge(xhr.responseText);
         }
       }

@@ -1,5 +1,5 @@
 function Dog() {
-  this._DEBUG = 0;
+  this._DEBUG = 1;
   this._currentUsage = localStorage['usage'];
   this._monthlyCap = localStorage['cap'];
   this._percent = localStorage['percent'];
@@ -7,11 +7,19 @@ function Dog() {
   this._supportTelephone = '541-555-1212';
 
   if(!this._percent) {
-    localStorage['percent'] = 99;
+    localStorage['percent'] = 1;
   }
 
   if(!this._minute) {
-    localStorage['minute'] = 1440;
+    localStorage['minute'] = 1;
+  }
+
+  if(!this._usage) {
+    localStorage['usage'] = 0;
+  }
+
+  if(!this._cap) {
+    localStorage['cap'] = 0;
   }
 
   this.log = function(text) {
@@ -43,25 +51,26 @@ function Dog() {
   this.notify = function() {
 
     // Create a simple text notification:
-    var usage = localStorage['usage'];
-    dog.log("dog.notify(): " + usage);
+    var usage = localStorage['usage'] || 0;
+    dog.log("dog.notify(): usage = " + usage);
 
-    var cap = localStorage['cap'];
-    dog.log("dog.notify(): " + cap);
+    var cap = localStorage['cap'] || 0;
+    dog.log("dog.notify(): cap = " + cap);
 
-    var percent = localStorage['percent'];
-    dog.log("dog.notify(): " + percent );
+    var percent = localStorage['percent'] || 1;
+    dog.log("dog.notify(): percent = " + percent );
 
     var target = cap / usage * 10;
     var pattern = /(\d{1,2})/g
     var results = pattern.exec(target);
     dog.log("dog.notify(): " + results);
 
-    var percentage = results ? results[1] : 0;
-    dog.log("dog.notify(): " + percentage);
+    var percentage = results ? results[1] : 1;
+
+    dog.log("dog.notify(): percentage = " + percentage);
 
     if(percentage >= percent) {
-      var message = 'You have used ' + percentage + '% of your monthly alloment. Feel free to call ' + dog._supportTelephone + ' and increase your usage by upgrading your account.';
+      var message = 'You have used ' + percentage + '% of your monthly alloment. If you call ' + dog._supportTelephone + ' you can upgrade your account.';
       dog.log("this.notify(): " + message);
       var notification = webkitNotifications.createNotification(
         '48x48.png',  // icon url - can be relative
@@ -107,7 +116,7 @@ function Dog() {
       xhr.send(params);
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
-          dog.log(xhr.responseText);
+          //dog.log(xhr.responseText);
           dog.setBadge(xhr.responseText);
         }
       }

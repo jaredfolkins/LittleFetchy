@@ -9,6 +9,10 @@ bandwith usage.
 
 Releases:
 
+0.4,1
+
+fix: bug that would not accurately save the data.
+
 0.4
 
 fix: bug that would prevent tool from trying to update after saving options.

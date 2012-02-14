@@ -9,7 +9,7 @@ bandwith usage.
 
 Releases:
 
-0.4,1
+0.4.1
 
 fix: bug that would not accurately save the data.
 

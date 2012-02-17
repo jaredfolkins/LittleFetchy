@@ -82,7 +82,7 @@ function Dog() {
   };
 
   this.setBadge = function(text) {
-    var pattern = /Current\sUsage:\s\<\/strong\>(\d*)\.\d\sGB\/(\d*)\sGB\<\/td\>/g;
+    var pattern = /Current\sUsage:\s\<\/strong\>(\d*)\.?\d?\sGB\/(\d*)\sGB\<\/td\>/g;
     var results = pattern.exec(text);
     if(results) {
       localStorage['usage'] = results[1];

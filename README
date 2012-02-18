@@ -9,6 +9,14 @@ bandwith usage.
 
 Releases:
 
+0.4.3
+
+fix: regex for grabbing usage wasn't accounting for integers, just floats
+
+0.4.2
+
+fix: polling bug that would cause LittleFetchy to crash
+
 0.4.1
 
 fix: bug that would not accurately save the data.

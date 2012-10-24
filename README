@@ -6,13 +6,17 @@ Your ISP allows you a specific bandwidth allotment per billing cycle and you do 
 
 Solution:
 
-LittleFetchy is a Chrome Extension that aims to seamlessly gather someone's usage data from their ISP, on their behallf, and display it inside their Chrome browser.
+LittleFetchy is a Chrome Extension that aims to seamlessly gather your usage data from your ISP, on your behalf, and display it inside your Chrome browser.
 
 Supported ISPs:
 
 BendBroadband
 
 Releases:
+
+0.5.2
+
+enhc: Added bootstrap.min.css for better styling
 
 0.5.1
 

@@ -2,13 +2,11 @@ LittleFetchy
 
 Problem:
 
-Your ISP allows you a specific bandwidth allotment of monthly usage and you hate logging
-into their website to check it how much you've used.
+Your ISP allows you a specific bandwidth allotment per billing cycle and you hate constantly accessing their website to check your usage.
 
 Solution:
 
-LittleFetchy is a Chrome Extension that aims to seamlessly gather
-someone's usage data from their ISP, on their behallf, and display it inside their Chrome browser.
+LittleFetchy is a Chrome Extension that aims to seamlessly gather someone's usage data from their ISP, on their behallf, and display it inside their Chrome browser.
 
 Supported ISPs:
 

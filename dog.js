@@ -1,16 +1,22 @@
 function Dog() {
+
+  this.minute = localStorage['minute'];
+
   this._DEBUG = 1;
   this._currentUsage = localStorage['usage'];
   this._monthlyCap = localStorage['cap'];
   this._percent = localStorage['percent'];
-  this._minute = localStorage['minute'];
   this._supportTelephone = '541-555-1212';
+
+  this.init = function() {
+    this.run();
+  };
 
   if(!this._percent) {
     localStorage['percent'] = 1;
   }
 
-  if(!this._minute) {
+  if(!this.minute) {
     localStorage['minute'] = 1;
   }
 
@@ -23,13 +29,13 @@ function Dog() {
   }
 
   this.log = function(text) {
-    if(dog._DEBUG == 1) {
+    if(this._DEBUG == 1) {
       console.log(text);
     }
   };
 
   this.setUsageBadge = function(usage) {
-    dog.log('setUsageBadge() Current Usage = ' + dog._currentUsage);
+    this.log('setUsageBadge() Current Usage = ' + this._currentUsage);
     chrome.browserAction.setBadgeText({
       text: String( usage + 'g' )
     });
@@ -39,7 +45,7 @@ function Dog() {
   };
 
   this.setUsageBadgeError = function() {
-    dog.log('setUsageBadgeError');
+    this.log('setUsageBadgeError');
     chrome.browserAction.setBadgeText({
       text: String('error')
     });
@@ -52,26 +58,26 @@ function Dog() {
 
     // Create a simple text notification:
     var usage = localStorage['usage'] || 0;
-    dog.log("dog.notify(): usage = " + usage);
+    this.log("dog.notify(): usage = " + usage);
 
     var cap = localStorage['cap'] || 0;
-    dog.log("dog.notify(): cap = " + cap);
+    this.log("dog.notify(): cap = " + cap);
 
     var percent = localStorage['percent'] || 1;
-    dog.log("dog.notify(): percent = " + percent );
+    this.log("dog.notify(): percent = " + percent );
 
     var target = cap / usage * 10;
     var pattern = /(\d{1,2})/g
     var results = pattern.exec(target);
-    dog.log("dog.notify(): " + results);
+    this.log("dog.notify(): " + results);
 
     var percentage = results ? results[1] : 1;
 
-    dog.log("dog.notify(): percentage = " + percentage);
+    this.log("dog.notify(): percentage = " + percentage);
 
     if(percentage >= percent) {
-      var message = 'You have used ' + percentage + '% of your monthly alloment. If you call ' + dog._supportTelephone + ' you can upgrade your account.';
-      dog.log("this.notify(): " + message);
+      var message = 'You have used ' + percentage + '% of your monthly alloment. If you call ' + this._supportTelephone + ' you can upgrade your account.';
+      this.log("dog.notify(): " + message);
       var notification = webkitNotifications.createNotification(
         '48x48.png',  // icon url - can be relative
         'Usage Alert!',  // notification title
@@ -87,12 +93,12 @@ function Dog() {
     if(results) {
       localStorage['usage'] = results[1];
       localStorage['cap'] = results[2];
-      dog._currentUsage = results[1];
-      dog._monthlyCap = results[2];
-      dog.setUsageBadge(dog._currentUsage);
+      this._currentUsage = results[1];
+      this._monthlyCap = results[2];
+      this.setUsageBadge(dog._currentUsage);
     } else {
-      dog.setUsageBadgeError();
-      dog.unsetLocalStoragePassword();
+      this.setUsageBadgeError();
+      this.unsetLocalStoragePassword();
     }
   };
 
@@ -104,31 +110,32 @@ function Dog() {
     var email = encodeURIComponent(localStorage['email']);
     var password = encodeURIComponent(localStorage['password']);
     var usage = localStorage['usage'];
-    dog.log("dog.run(): " + email + "," + password + "," + usage);
+    this.log("dog.run(): " + email + "," + password + "," + usage);
     if(email != 'undefined' && password != 'undefined') {
-      dog.log(email);
-      dog.log(password);
-      var url = "https://secure.bendbroadband.com/usage/usage.asp?action=submit&pageID=mbb&subID=hsiu&adct=3";
-      var params = 'Submit1=View+Usage&email=' + email + '&password=' + password;
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.send(params);
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-          //dog.log(xhr.responseText);
-          dog.setBadge(xhr.responseText);
-        }
-      }
+      this.scrape_bendbroadband(email, password);
     }
   };
 
-  this.init = function() {
-    dog.run();
-    var minute = localStorage['minute'];
-    dog.log("dog.init(): " + minute)
-    //if(localStorage['fetchInterval']) ?  = local
-    setInterval("dog.run()", 1000*60*60*8);
-    setInterval("dog.notify()", 1000*60*minute);
-  };
+  this.scrape_bendbroadband = function(email, password) {
+    dog.log("dog.scrape_bendbroadband()");
+    this.log(email);
+    this.log(password);
+    var url = "https://secure.bendbroadband.com/usage/usage.asp?action=submit&pageID=mbb&subID=hsiu&adct=3";
+    var params = 'Submit1=View+Usage&email=' + email + '&password=' + password;
+    this.http_request(url, params);
+  }
+
+  this.http_request = function(url, params) {
+    dog.log("dog.http_request()");
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 ) {
+        //dog.log(xhr.responseText);
+        dog.setBadge(xhr.responseText);
+      }
+    }
+  }
 };

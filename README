@@ -9,6 +9,12 @@ bandwith usage.
 
 Releases:
 
+0.5.0
+
+fix: manifest 2 compliant
+security: XSS concerns with imbedding javascript in html files, refactored said javascript into seperate files
+security: setInterval() now uses anonymous function to avoid XSS vulnerability
+
 0.4.3
 
 fix: regex for grabbing usage wasn't accounting for integers, just floats

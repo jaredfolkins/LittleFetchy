@@ -1,82 +1,11 @@
 <html>
-  <head><title>WatchDog Options</title>
+  <head>
+    <title>LittleFetchy</title>
     <script src="dog.js"></script>
-    <script type="text/javascript">
-
-      // Saves options to localStorage.
-    function save_options() {
-
-      var email_field = document.getElementById("email");
-      localStorage["email"] = email_field.value;
-
-      var password_field = document.getElementById("password");
-      localStorage["password"] = password_field.value;
-
-      var percent_select = document.getElementById("percent");
-      var percent = percent_select.children[percent_select.selectedIndex].value;
-      localStorage["percent"] = percent;
-
-      var minute_select = document.getElementById("minute");
-      var minute = minute_select.children[minute_select.selectedIndex].value;
-      localStorage["minute"] = minute;
-
-      // Update status to let user know options were saved.
-      var status = document.getElementById("status");
-
-      status.innerHTML = '<div style="color:#FF8700">Options Saved</div>';
-      setTimeout(function() {
-        status.innerHTML = "";
-      }, 2000);
-
-      //get background.html and make the dog object run
-      var background = chrome.extension.getBackgroundPage();
-      background.dog.notify();
-      background.dog.run();
-    }
-
-// Restores select box state to saved value from localStorage.
-function restore_options() {
-
-  var email = localStorage["email"];
-  var password = localStorage["password"];
-  var percent = localStorage["percent"];
-  var minute = localStorage["minute"];
-
-  if (email) {
-    var email_field = document.getElementById("email");
-    email_field.value = email;
-  }
-
-  if (password) {
-    var password_field = document.getElementById("password");
-    password_field.value = password;
-  }
-
-  if (percent) {
-    var select = document.getElementById("percent");
-    for (var i = 0; i < select.children.length; i++) {
-      var child = select.children[i];
-      if (child.value == percent) {
-        child.selected = "true";
-      }
-    }
-  }
-
-  if (minute) {
-    var select = document.getElementById("minute");
-    for (var i = 0; i < select.children.length; i++) {
-      var child = select.children[i];
-      if (child.value == minute) {
-        child.selected = "true";
-      }
-    }
-  }
-}
-
-</script>
-</head>
-  <body onload="restore_options()">
-
+    <script src="popup.js"></script>
+  </head>
+  <!-- <body onload="restore_options()"> -->
+  <body>
     <div id="status"></div>
     <br />
     <div class="title">Email:</div>
@@ -103,11 +32,9 @@ function restore_options() {
       <option value="1">1</option>
     </select> hours.
     </p>
-    <button onclick="save_options()">Save</button>
+    <!-- <button onclick="save_options()">Save</button> -->
+    <button id="save">Save</button>
     <br />
-    <br />
-    <br />
-    <p>Version: 0.4.3</p>
+    <p>Version: 0.5.0</p>
   </body>
-
 </html>

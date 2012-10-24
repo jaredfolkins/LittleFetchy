@@ -1,8 +1,8 @@
 {
   "name" : "LittleFetchy (Beta)",
   "manifest_version" : 2,
-  "version" : "0.5.0",
-  "description" : "Written by Jared Folkins, this tool allows BendBroadBand subscribers to monitor data usage.",
+  "version" : "0.5.1",
+  "description" : "Written by Jared Folkins, this tool allows ISP subscribers to monitor data usage.",
   "options_page" : "popup_options.html",
   "background" : { "page" : "background.html" },
   "browser_action" : {
@@ -21,6 +21,6 @@
     "tabs",
     "https://*.bendbroadband.com/"
   ],
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  //"content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
   "web_accessible_resources" : [ "48x48.png" ]
 }

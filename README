@@ -16,6 +16,13 @@ BendBroadband
 
 Releases:
 
+0.5.1
+
+enhc: added "fetch" badge so users would know application is gathering data
+enhc: created generic icon for use with any ISP
+fix: directory structure
+fix: clearing password field on failed auth (annoying)
+
 0.5.0
 
 fix: manifest 2 compliant

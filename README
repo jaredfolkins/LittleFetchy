@@ -3,9 +3,19 @@ Copyright Jared Folkins 2012
 
 Description:
 
-LittleFetchy is a Chrome Extension that logs a BendBroadBand
-customer into their account and notifies them of their monthly
-bandwith usage.
+Problem:
+
+Your ISP allows you a certain allot ment of monthly usage and you hate logging
+into their website to check it.
+
+Solution:
+
+LittleFetchy is a Chrome Extension that aims to seamlessly gather
+someone's usage data from their ISP, on their behallf.
+
+Supported ISPs:
+
+BendBroadband
 
 Releases:
 

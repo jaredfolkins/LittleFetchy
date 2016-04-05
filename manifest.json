@@ -6,12 +6,13 @@
   "options_page" : "popup_options.html",
   "background" : { "page" : "background.html" },
   "browser_action" : {
-    "default_icon" : "19x19.png",
+    "default_icon" : "128x128.png",
     "default_popup" : "popup_options.html"
   },
   "icons" : {
-    "19" : "19x19.png",
+    "16" : "16x16.png",
     "48" : "48x48.png",
+    "64" : "64x64.png",
     "128" : "128x128.png"
   },
   "permissions" : [

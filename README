@@ -14,6 +14,10 @@ BendBroadband
 
 Releases:
 
+0.5.3
+
+fix: modified code to point to new endpoint and regex to scrape new data
+
 0.5.2
 
 enhc: Added bootstrap.min.css for better styling

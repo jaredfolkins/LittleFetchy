@@ -14,6 +14,13 @@ BendBroadband
 
 Releases:
 
+0.6.0
+
+enhc: display usage and cap in popup
+enhc: badge is color coded based on percentage of use green/yellow/orange/red
+enhc: refresh the data from endpoint manually 
+enhc: polling code refactored 
+
 0.5.3
 
 fix: modified code to point to new endpoint and regex to scrape new data

@@ -1,12 +1,12 @@
 {
   "name" : "LittleFetchy",
   "manifest_version" : 2,
-  "version" : "0.5.3",
+  "version" : "0.6.0",
   "description" : "Written by Jared Folkins, this tool allows ISP subscribers to monitor data usage.",
   "options_page" : "popup_options.html",
   "background" : { "page" : "background.html" },
   "browser_action" : {
-    "default_icon" : "128x128.png",
+    "default_icon" : "64x64.png",
     "default_popup" : "popup_options.html"
   },
   "icons" : {

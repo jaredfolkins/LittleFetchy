@@ -26,15 +26,18 @@
       </div>
 
       <p>
+        Usage: <span id="usage"></span>GB / <span id="cap"></span>GB
+      </p>
+      <p>
       If my usage goes over
-      <select id="percent" class="span1">
+      <select id="percent" class="span1" style="width:55px;">
         <option value="99">99%</option>
         <option value="95">95%</option>
         <option value="90">90%</option>
         <option value="90">80%</option>
         <option value="1">1%</option>
       </select>, notify me every
-      <select id="minute" class="span1">
+      <select id="minute" class="span1" style="width:100px;">
         <option value="2880">48 hours</option>
         <option value="1440">24 hours</option>
         <option value="480">4 hours</option>
@@ -54,9 +57,10 @@
       </p>
 
       <button id="save" class="btn btn-medium btn-inverse">Save</button>
+      <button id="refresh" class="btn btn-medium btn-inverse">Refresh</button>
       <br />
       <br />
-      <p><small>Version: 0.5.3</small></p>
+      <p><small>Version: 0.6.0</small></p>
     </div>
   </body>
 </html>

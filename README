@@ -2,7 +2,7 @@ LittleFetchy
 
 Problem:
 
-Your ISP caps your bandwidth use per billing cycle and you do not like accessing their website to check your usage.
+Your ISP caps your bandwidth use per billing cycle and charges you fees *$$$* if you go over. You do not like accessing their website to check your usage.
 
 Solution:
 
@@ -10,7 +10,15 @@ LittleFetchy is a Chrome Extension that aims to seamlessly gather your usage dat
 
 Supported ISPs:
 
-BendBroadband
+ - BendBroadband
+
+Features:
+
+ - automatically polls ISP endpoint to gather data
+ - displays current usage on extension badge
+ - alerts you when going over specified threshold
+ - badge changes color as you approach threshold
+ - usage and cap data displayed in settings window
 
 Releases:
 

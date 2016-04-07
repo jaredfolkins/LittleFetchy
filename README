@@ -22,6 +22,10 @@ Features:
 
 Releases:
 
+0.7.0
+
+enhc: added basic templating system
+
 0.6.2
 
 bug: alert was not displaying correctly

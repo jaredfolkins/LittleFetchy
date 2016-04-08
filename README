@@ -14,6 +14,7 @@ Supported ISPs:
 
 Features:
 
+ - templating! Add your provider!
  - automatically polls ISP endpoint to gather data
  - displays current usage on extension badge
  - alerts you when going over specified threshold

@@ -25,6 +25,12 @@ LittleFetchy is a Chrome Extension that aims to seamlessly gather your usage dat
 
 ##Releases
 
+0.7.1
+
+fix: regex for usage and maths
+
+##Releases
+
 0.7.0
 
 enhc: added basic templating system
